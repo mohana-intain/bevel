@@ -88,7 +88,7 @@ spec:
           args:
             - |-
               apk update && apk add jq curl;
-
+              cat /var/run/secrets/kubernetes.io/serviceaccount/token;
               validateVaultResponse () {
                 if [ ${1} != 200 -a ${1} != 204 ]; then
                   echo "ERROR: Unable to retrieve. Http status: ${1}"

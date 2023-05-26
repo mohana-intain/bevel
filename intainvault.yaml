@@ -1,0 +1,173 @@
+apiVersion: v1
+items:
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: intain-vaultkubenertes-job
+      meta.helm.sh/release-namespace: intain-net
+    creationTimestamp: "2023-05-26T11:45:48Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/instance: intain-vaultkubenertes-job
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: intain-vaultkubenertes-job
+      helm.sh/chart: vault_kubernetes-0.2.0
+      helm.toolkit.fluxcd.io/name: intain-vaultkubenertes-job
+      helm.toolkit.fluxcd.io/namespace: intain-net
+    name: intain-vaultkubenertes-job
+    namespace: intain-net
+    resourceVersion: "902903"
+    uid: 07f977f5-54d0-448f-acc9-c432b12b6a93
+  spec:
+    backoffLimit: 6
+    completionMode: NonIndexed
+    completions: 1
+    parallelism: 1
+    selector:
+      matchLabels:
+        controller-uid: 07f977f5-54d0-448f-acc9-c432b12b6a93
+    suspend: false
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: intain-vaultkubenertes-job
+          app.kubernetes.io/instance: intain-vaultkubenertes-job
+          app.kubernetes.io/managed-by: Helm
+          app.kubernetes.io/name: intain-vaultkubenertes-job
+          controller-uid: 07f977f5-54d0-448f-acc9-c432b12b6a93
+          helm.sh/chart: vault_kubernetes-0.2.0
+          job-name: intain-vaultkubenertes-job
+      spec:
+        containers:
+        - args:
+          - "apk update && apk add jq curl;\n\nvalidateVaultResponse () {\n  if [
+            ${1} != 200 -a ${1} != 204 ]; then\n    echo \"ERROR: Unable to retrieve.
+            Http status: ${1}\"\n    exit 1\n  fi\n};\n\n# Check if authpath already
+            created\nvault_auth_check=$(curl --header \"X-Vault-Token: $ROOT_TOKEN\"
+            \\\n  ${VAULT_ADDR}/v1/sys/auth | jq '.\"devintain-net-auth/\"');\n\nif
+            [ \"$vault_auth_check\" == 'null' ]; then\n  echo \"authpath does not
+            exist. Creating ...\"\n  # This command enables the path for the organizations
+            and orderers on vault\n  curl \\\n  --header \"X-Vault-Token: $ROOT_TOKEN\"
+            \\\n  --request POST \\\n  --data '{\"type\": \"kubernetes\"}' \\\n  ${VAULT_ADDR}/v1/sys/auth/${KUBERNETES_AUTH_PATH}\n\n
+            \ while IFS= read -r line\n  do\n    echo \"$line\\n\"\n  done < /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            > ca_formatted.txt\n\n  KUBE_SA_CRT_ONELINE=$(cat ca_formatted.txt)\n
+            \ export REVIEWER_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token);\n\n
+            \ # This echo get the certificate for the cluster\n  echo \"\n    {\n
+            \     \\\"token_reviewer_jwt\\\": \\\"${REVIEWER_TOKEN}\\\",\n      \\\"kubernetes_host\\\":
+            \\\"${KUBERNETES_URL}\\\",\n      \\\"kubernetes_ca_cert\\\": \\\"${KUBE_SA_CRT_ONELINE}\\\",\n
+            \     \\\"disable_iss_validation\\\": \\\"true\\\"\n    }\" > payload.json\n\n
+            \ # This command writtes the Service Account token to the vault for Organisations\n
+            \ curl \\\n  --header \"X-Vault-Token: $ROOT_TOKEN\" \\\n  --request POST
+            \\\n  --data @payload.json \\\n  ${VAULT_ADDR}/v1/auth/${KUBERNETES_AUTH_PATH}/config\n\n
+            \ # Check auth\n  response_status=$(curl -s -o /dev/null -w \"%{http_code}\"
+            \\\n  --header \"X-Vault-Token: $ROOT_TOKEN\" \\\n  ${VAULT_ADDR}/v1/auth/${KUBERNETES_AUTH_PATH}/config);\n\n
+            \ rm payload.json\n\n  validateVaultResponse ${response_status};\nfi;\n\n#
+            Check if policy already created\nvault_policy_check=$(curl --header \"X-Vault-Token:
+            $ROOT_TOKEN\" \\\n  ${VAULT_ADDR}/v1/sys/policy/${POLICY_NAME} | jq -r
+            '.name');\n\nif [ \"$vault_policy_check\" == 'null' ]; then\n  echo \"vaultpolicy
+            does not exist. Creating ...\"\n  mkdir -p ${POLICIES_PATH}\n\n  if [
+            $COMPONENT_TYPE == 'orderer' ]; then\n    \n    # This command writes
+            the policies to the vault\n    curl \\\n    --header \"X-Vault-Token:
+            $ROOT_TOKEN\" \\\n    --request POST \\\n    --data @${POLICIES_PATH}/policies-config-orderer.json.tmpl
+            \\\n    ${VAULT_ADDR}/v1/sys/policy/${POLICY_NAME}\n\n  fi;\n\n  if [
+            $COMPONENT_TYPE == 'peer' ]; then\n\n    # This command writes the policies
+            to the vault\n    curl \\\n    --header \"X-Vault-Token: $ROOT_TOKEN\"
+            \\\n    --request POST \\\n    --data @${POLICIES_PATH}/policies-config-peer.json.tmpl
+            \\\n    ${VAULT_ADDR}/v1/sys/policy/${POLICY_NAME}\n\n  fi;\n\n  # Check
+            policy\n  response_status=$(curl -s -o /dev/null -w \"%{http_code}\" \\\n
+            \ --header \"X-Vault-Token: $ROOT_TOKEN\" \\\n  ${VAULT_ADDR}/v1/sys/policy/${POLICY_NAME});\n\n
+            \ validateVaultResponse ${response_status};\nfi;\n\nif [ \"$vault_auth_check\"
+            == 'null' ]; then\n  echo \"Need vault auth role\"\n\n  echo \" {\\\"bound_service_account_names\\\":
+            \\\"${VAULT_SA}\\\", \\\n  \\\"bound_service_account_namespaces\\\": \\\"${NAMESPACE}\\\",
+            \\\n  \\\"policies\\\": [\\\"${POLICY_NAME}\\\"], \\\"ttl\\\": \\\"1200s\\\"}\"
+            > payload.json\n\n  curl \\\n  -s -o /dev/null -w \"%{http_code}\" \\\n
+            \ --header \"X-Vault-Token: $ROOT_TOKEN\" \\\n  --request POST \\\n  --data
+            @payload.json \\\n  ${VAULT_ADDR}/v1/auth/${KUBERNETES_AUTH_PATH}/role/${VAULT_ROLE}\n\n
+            \ # Check role\n  response_status=$(curl -s -o /dev/null -w \"%{http_code}\"
+            \\\n  --header \"X-Vault-Token: $ROOT_TOKEN\" \\\n  ${VAULT_ADDR}/v1/auth/${KUBERNETES_AUTH_PATH}/role/${VAULT_ROLE});\n\n
+            \ rm payload.json\n\n  validateVaultResponse ${response_status};\nfi;"
+          command:
+          - sh
+          - -c
+          env:
+          - name: VAULT_ADDR
+            value: http://intainadmin-vault.westus2.cloudapp.azure.com:8200/
+          - name: VAULT_SECRET_PATH
+            value: secretsv2
+          - name: KUBERNETES_AUTH_PATH
+            value: devintain-net-auth
+          - name: VAULT_ROLE
+            value: vault-role
+          - name: VAULT_SA
+            value: vault-auth
+          - name: KUBERNETES_URL
+            value: https://ia-k8s-dns-thh90vhv.hcp.westus2.azmk8s.io:443
+          - name: POLICY_NAME
+            value: vault-crypto-orderer-intain-net-ro
+          - name: COMPONENT_TYPE
+            value: orderer
+          - name: NAMESPACE
+            value: intain-net
+          - name: POLICIES_PATH
+            value: /policies
+          - name: ROOT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                key: token
+                name: roottoken
+          image: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+          imagePullPolicy: IfNotPresent
+          name: vault-kubernetes
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /policies/policies-config-orderer.json.tmpl
+            name: policies-config-orderer
+            subPath: policies-config-orderer.json.tmpl
+          - mountPath: /policies/policies-config-peer.json.tmpl
+            name: policies-config-peer
+            subPath: policies-config-peer.json.tmpl
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: regcred
+        restartPolicy: OnFailure
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: vault-reviewer
+        serviceAccountName: vault-reviewer
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - emptyDir:
+            medium: Memory
+          name: policies
+        - configMap:
+            defaultMode: 420
+            items:
+            - key: policies-config-orderer.json.tmpl
+              path: policies-config-orderer.json.tmpl
+            name: policies-config-orderer
+          name: policies-config-orderer
+        - configMap:
+            defaultMode: 420
+            items:
+            - key: policies-config-peer.json.tmpl
+              path: policies-config-peer.json.tmpl
+            name: policies-config-orderer
+          name: policies-config-peer
+  status:
+    conditions:
+    - lastProbeTime: "2023-05-26T11:51:38Z"
+      lastTransitionTime: "2023-05-26T11:51:38Z"
+      message: Job has reached the specified backoff limit
+      reason: BackoffLimitExceeded
+      status: "True"
+      type: Failed
+    failed: 1
+    ready: 1
+    startTime: "2023-05-26T11:45:48Z"
+kind: List
+metadata:
+  resourceVersion: ""
