@@ -1,0 +1,1001 @@
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:18Z"
+  name: default
+  namespace: default
+  resourceVersion: "250"
+  uid: 982a9f02-e488-4a53-a764-f6b7188ff847
+secrets:  
+- name: default
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: default
+  namespace: default
+  annotations:
+    kubernetes.io/service-account.name: default
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-25T09:36:56Z"
+  name: default
+  namespace: ingress-controller
+  resourceVersion: "467368"
+  uid: 70181a4d-69e6-4f00-97a7-d2838b35aac2
+secrets:  
+- name: default  
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: default
+  namespace: ingress-controller
+  annotations:
+    kubernetes.io/service-account.name: default
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    meta.helm.sh/release-name: haproxy
+    meta.helm.sh/release-namespace: default
+  creationTimestamp: "2023-05-25T09:36:56Z"
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  name: ingress-controller
+  namespace: ingress-controller
+  resourceVersion: "467370"
+  uid: fa303216-a4ba-433c-9d81-aa3808c85022
+secrets:  
+- name: ingress-controller  
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ingress-controller
+  namespace: ingress-controller
+  annotations:
+    kubernetes.io/service-account.name: ingress-controller
+type: kubernetes.io/service-account-token
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:18Z"
+  name: default
+  namespace: kube-node-lease
+  resourceVersion: "249"
+  uid: 4bf59f86-6791-45ef-9496-e8759cf2b352
+secrets:  
+- name: default  
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: default
+  namespace: kube-node-lease
+  annotations:
+    kubernetes.io/service-account.name: default
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:18Z"
+  name: default
+  namespace: kube-public
+  resourceVersion: "248"
+  uid: a70bea09-d0fc-486e-ba1e-44a3f99df289
+secrets:  
+- name: default   
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: default
+  namespace: kube-public
+  annotations:
+    kubernetes.io/service-account.name: default
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: attachdetach-controller
+  namespace: kube-system
+  resourceVersion: "231"
+  uid: 93d9522a-c62a-4aa0-8bbb-88a4aeafef84
+secrets:  
+- name: attachdetach-controller
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: attachdetach-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: attachdetach-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: azure-cloud-provider
+  namespace: kube-system
+  resourceVersion: "214"
+  uid: acd63970-2828-4947-9e3a-d5ee36eeb5a3
+secrets:  
+- name: azure-cloud-provider  
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: azure-cloud-provider
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: azure-cloud-provider
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile"},"name":"azure-npm","namespace":"kube-system"}}
+  creationTimestamp: "2023-05-24T10:34:31Z"
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+  name: azure-npm
+  namespace: kube-system
+  resourceVersion: "351"
+  uid: 7231eb0e-a40a-444f-a853-9f672d7af5bb
+secrets:  
+- name: azure-npm   
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: azure-npm
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: azure-npm
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: bootstrap-signer
+  namespace: kube-system
+  resourceVersion: "229"
+  uid: 472b8959-85ac-4055-91fa-8d3168803b43
+secrets:  
+- name: bootstrap-signer
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bootstrap-signer
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: bootstrap-signer
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: certificate-controller
+  namespace: kube-system
+  resourceVersion: "224"
+  uid: 45dac96b-b916-4e15-87f1-4ccc5583be73
+secrets:  
+- name: certificate-controller
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: certificate-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: certificate-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","k8s-app":"cloud-node-manager","kubernetes.io/cluster-service":"true"},"name":"cloud-node-manager","namespace":"kube-system"}}
+  creationTimestamp: "2023-05-24T10:34:32Z"
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+    k8s-app: cloud-node-manager
+    kubernetes.io/cluster-service: "true"
+  name: cloud-node-manager
+  namespace: kube-system
+  resourceVersion: "371"
+  uid: 9bbc187d-8ae2-4856-9c14-655f2ac05498
+secrets:  
+- name: cloud-node-manager  
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloud-node-manager
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: cloud-node-manager
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: clusterrole-aggregation-controller
+  namespace: kube-system
+  resourceVersion: "218"
+  uid: eb2f232a-dda6-4e13-9dc2-5305d50a39be
+secrets:  
+- name: clusterrole-aggregation-controller  
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: clusterrole-aggregation-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: clusterrole-aggregation-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","kubernetes.io/cluster-service":"true"},"name":"coredns","namespace":"kube-system"}}
+  creationTimestamp: "2023-05-24T10:34:32Z"
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+    kubernetes.io/cluster-service: "true"
+  name: coredns
+  namespace: kube-system
+  resourceVersion: "384"
+  uid: 1de3a493-5822-41f4-9a2d-4327378a3d7a
+secrets:  
+- name: coredns
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: coredns
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: coredns
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile"},"name":"coredns-autoscaler","namespace":"kube-system"}}
+  creationTimestamp: "2023-05-24T10:34:32Z"
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+  name: coredns-autoscaler
+  namespace: kube-system
+  resourceVersion: "380"
+  uid: 1561284f-150f-45c9-8a78-6b5f707a2a2f
+secrets:  
+- name: coredns-autoscaler
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: coredns-autoscaler
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: coredns-autoscaler
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: cronjob-controller
+  namespace: kube-system
+  resourceVersion: "235"
+  uid: 7d8fc37c-d4d2-43af-bdce-a3e4549cff53
+secrets:  
+- name: cronjob-controller 
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cronjob-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: cronjob-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","kubernetes.io/bootstrapping":"rbac-defaults"},"name":"csi-azuredisk-node-sa","namespace":"kube-system"}}
+  creationTimestamp: "2023-05-24T10:34:32Z"
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: csi-azuredisk-node-sa
+  namespace: kube-system
+  resourceVersion: "419"
+  uid: 7b472392-f5a8-4a8a-afbf-e018e809b00e
+secrets:  
+- name: csi-azuredisk-node-sa 
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: csi-azuredisk-node-sa
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: csi-azuredisk-node-sa
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","kubernetes.io/bootstrapping":"rbac-defaults"},"name":"csi-azurefile-node-sa","namespace":"kube-system"}}
+  creationTimestamp: "2023-05-24T10:34:32Z"
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: csi-azurefile-node-sa
+  namespace: kube-system
+  resourceVersion: "430"
+  uid: 61a78443-f32d-48c7-9905-fc9380204269
+secrets:  
+- name: csi-azurefile-node-sa
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: csi-azurefile-node-sa
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: csi-azurefile-node-sa
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: daemon-set-controller
+  namespace: kube-system
+  resourceVersion: "215"
+  uid: 373b90ec-ac8c-4ade-8270-210976de80d7
+secrets:  
+- name: daemon-set-controller
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: daemon-set-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: daemon-set-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:18Z"
+  name: default
+  namespace: kube-system
+  resourceVersion: "247"
+  uid: cb563fbf-687b-4dd4-b39a-1405f2f095c2
+secrets:  
+- name: default
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: default
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: default
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: deployment-controller
+  namespace: kube-system
+  resourceVersion: "220"
+  uid: b67bf7d2-b41a-4ec1-b059-1e9a7a5ce3ec
+secrets:  
+- name: deployment-controller 
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: deployment-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: deployment-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: disruption-controller
+  namespace: kube-system
+  resourceVersion: "222"
+  uid: c50cfb5b-a2a7-4d56-9d6b-bd0ae89626d2
+secrets:  
+- name: disruption-controller   
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: disruption-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: disruption-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: endpoint-controller
+  namespace: kube-system
+  resourceVersion: "216"
+  uid: e542c71c-3368-4a14-b948-781cc013cf77
+secrets:  
+- name: endpoint-controller    
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: endpoint-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: endpoint-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: endpointslice-controller
+  namespace: kube-system
+  resourceVersion: "233"
+  uid: fbc1c6f3-14fe-4eca-96f0-157d8bab30a8
+secrets:  
+- name: endpointslice-controller
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: endpointslice-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: endpointslice-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: endpointslicemirroring-controller
+  namespace: kube-system
+  resourceVersion: "238"
+  uid: 38d89939-6f00-487c-8a0f-1f107d34a8a6
+secrets:  
+- name: endpointslicemirroring-controller
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: endpointslicemirroring-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: endpointslicemirroring-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: ephemeral-volume-controller
+  namespace: kube-system
+  resourceVersion: "232"
+  uid: f0347e2a-2b18-4820-bcd3-d100b3886c6c
+secrets:  
+- name: ephemeral-volume-controller
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ephemeral-volume-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: ephemeral-volume-controller
+type: kubernetes.io/service-account-token
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: expand-controller
+  namespace: kube-system
+  resourceVersion: "240"
+  uid: e24f5f0d-9b2c-48e2-a153-52e827ebb72e
+secrets:  
+- name: expand-controller
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: expand-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: expand-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: generic-garbage-collector
+  namespace: kube-system
+  resourceVersion: "227"
+  uid: e89e00e3-2725-4d92-9976-e537d4c87b7a
+secrets:  
+- name: generic-garbage-collector
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: generic-garbage-collector
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: generic-garbage-collector
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: horizontal-pod-autoscaler
+  namespace: kube-system
+  resourceVersion: "221"
+  uid: 0f6f2165-ec0f-4128-a12c-2f2654600623
+secrets:  
+- name: horizontal-pod-autoscaler
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: horizontal-pod-autoscaler
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: horizontal-pod-autoscaler
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: job-controller
+  namespace: kube-system
+  resourceVersion: "239"
+  uid: 05f7ca2c-2391-4e13-a158-0cdbce0c2fa0
+secrets:  
+- name: job-controller  
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: job-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: job-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","kubernetes.io/cluster-service":"true"},"name":"konnectivity-agent","namespace":"kube-system"}}
+  creationTimestamp: "2023-05-24T10:34:32Z"
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+    kubernetes.io/cluster-service: "true"
+  name: konnectivity-agent
+  namespace: kube-system
+  resourceVersion: "445"
+  uid: c8ef545c-39d2-46a0-8629-6c0c479d54ce
+secrets:  
+- name: konnectivity-agent
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: konnectivity-agent
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: konnectivity-agent
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile"},"name":"kube-proxy","namespace":"kube-system"}}
+  creationTimestamp: "2023-05-24T10:34:32Z"
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+  name: kube-proxy
+  namespace: kube-system
+  resourceVersion: "498"
+  uid: ebb8af34-8d76-4408-9f86-21eb7d50b979
+secrets:  
+- name: kube-proxy
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kube-proxy
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: kube-proxy
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","kubernetes.io/cluster-service":"true"},"name":"metrics-server","namespace":"kube-system"}}
+  creationTimestamp: "2023-05-24T10:34:32Z"
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+    kubernetes.io/cluster-service: "true"
+  name: metrics-server
+  namespace: kube-system
+  resourceVersion: "467"
+  uid: 8e2b8b0e-f873-419d-a2b4-197e533f3835
+secrets:  
+- name: metrics-server  
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: metrics-server
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: metrics-server
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: namespace-controller
+  namespace: kube-system
+  resourceVersion: "244"
+  uid: 56dec998-b39c-45e8-8b70-9d2bf2347cca
+secrets:  
+- name: namespace-controller
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: namespace-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: namespace-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: node-controller
+  namespace: kube-system
+  resourceVersion: "230"
+  uid: 13e5af9c-c554-42bc-ac7d-93fe2e8e1e90
+secrets:  
+- name: node-controller  
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: node-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: node-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: persistent-volume-binder
+  namespace: kube-system
+  resourceVersion: "237"
+  uid: 1df46aa2-5b53-4503-a8f1-17eabe88642d
+secrets:  
+- name: persistent-volume-binder 
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: persistent-volume-binder
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: persistent-volume-binder
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: pod-garbage-collector
+  namespace: kube-system
+  resourceVersion: "217"
+  uid: 13585e49-7d71-41f1-b2a2-57773eed151b
+secrets:  
+- name: pod-garbage-collector   
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pod-garbage-collector
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: pod-garbage-collector
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: pv-protection-controller
+  namespace: kube-system
+  resourceVersion: "242"
+  uid: e3bf5704-81cd-4dfa-a137-0232277c29b8
+secrets:  
+- name: pv-protection-controller 
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pv-protection-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: pv-protection-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: pvc-protection-controller
+  namespace: kube-system
+  resourceVersion: "241"
+  uid: 2e42049d-87e5-4c71-b8bb-bbc739c63898
+secrets:  
+- name: pvc-protection-controller
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pvc-protection-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: pvc-protection-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: replicaset-controller
+  namespace: kube-system
+  resourceVersion: "234"
+  uid: f6ae3e05-915a-4c22-b1e4-c9b493a5ec44
+secrets:  
+- name: replicaset-controller 
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: replicaset-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: replicaset-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: replication-controller
+  namespace: kube-system
+  resourceVersion: "219"
+  uid: de5a3e12-1cef-4515-98a1-00e11214ece6
+secrets:  
+- name: replication-controller
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: replication-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: replication-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: resourcequota-controller
+  namespace: kube-system
+  resourceVersion: "243"
+  uid: 5ab0f6b6-90c8-44f3-b60b-c3450874f396
+secrets:  
+- name: resourcequota-controller 
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: resourcequota-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: resourcequota-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:18Z"
+  name: root-ca-cert-publisher
+  namespace: kube-system
+  resourceVersion: "246"
+  uid: 31ae06a9-9204-4934-86fb-a2c241dab78d
+secrets:  
+- name: root-ca-cert-publisher 
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: root-ca-cert-publisher
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: root-ca-cert-publisher
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: service-account-controller
+  namespace: kube-system
+  resourceVersion: "226"
+  uid: 0e75105f-62ac-4e55-918e-4eb920a411cb
+secrets:  
+- name: service-account-controller  
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: service-account-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: service-account-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: statefulset-controller
+  namespace: kube-system
+  resourceVersion: "223"
+  uid: 68f57a3b-3f14-48c4-a0e9-2a1cb2f10277
+secrets:  
+- name: statefulset-controller   
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: statefulset-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: statefulset-controller
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: token-cleaner
+  namespace: kube-system
+  resourceVersion: "245"
+  uid: 226e34d0-a027-49b5-a2e3-2f1034def9b6
+secrets:  
+- name: token-cleaner
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: token-cleaner
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: token-cleaner
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: ttl-after-finished-controller
+  namespace: kube-system
+  resourceVersion: "225"
+  uid: ed318ebf-46a5-4f59-a742-9299d6ba294f
+secrets:  
+- name: ttl-after-finished-controller
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ttl-after-finished-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: ttl-after-finished-controller
+type: kubernetes.io/service-account-token
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-24T10:34:17Z"
+  name: ttl-controller
+  namespace: kube-system
+  resourceVersion: "228"
+  uid: b2ba61a1-7ebc-40b7-b36b-205077dfeb2d
+secrets:  
+- name: ttl-controller
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ttl-controller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: ttl-controller
+type: kubernetes.io/service-account-token  
