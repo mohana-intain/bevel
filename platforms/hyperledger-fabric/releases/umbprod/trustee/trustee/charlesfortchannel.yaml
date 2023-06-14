@@ -1,0 +1,51 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: channel-trustee-charlesfortchannel
+  namespace: trustee-net
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: channel-trustee-charlesfortchannel
+  chart:
+    git: git@github.com:sivaramkannan/baf-intain-fork.git
+    ref: umbprod
+    path: platforms/hyperledger-fabric/charts/create_channel   
+  values:
+    metadata:
+      namespace: trustee-net
+      network:
+        version 2.2.2
+      images:
+        fabrictools: hyperledger/fabric-tools:2.2.2
+        alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+    peer:
+      name: peer0
+      address: peer0.trustee-net:7051
+      localmspid: trusteeMSP
+      loglevel: debug
+      tlsstatus: true
+
+    vault:
+      role: vault-role
+      address: http://umbprod.westus2.cloudapp.azure.com:8200
+      authpath: devtrustee-net-auth
+      adminsecretprefix: secret/crypto/peerOrganizations/trustee-net/users/admin
+      orderersecretprefix: secret/crypto/peerOrganizations/trustee-net/orderer 
+      serviceaccountname: vault-auth
+      imagesecretname: regcred
+
+    channel:
+      name: charlesfortchannel
+    orderer:
+      address: orderer1.intain-net:7050
+    channeltx: |-
+      CucDCiAKHggCGgYI/8/BlgYiEmNoYXJsZXNmb3J0Y2hhbm5lbBLCAwq/AwoSY2hhcmxlc2ZvcnRj
+      aGFubmVsEksSOQoLQXBwbGljYXRpb24SKhIOCgp0cnVzdGVlTVNQEgASGAoUY2hhcmxlc2ZvcnRp
+      c3N1ZXJNU1ASABoOCgpDb25zb3J0aXVtEgAa2wIStwIKC0FwcGxpY2F0aW9uEqcCCAESDgoKdHJ1
+      c3RlZU1TUBIAEhgKFGNoYXJsZXNmb3J0aXNzdWVyTVNQEgAaJAoMQ2FwYWJpbGl0aWVzEhQSCgoI
+      CgRWMl8wEgAaBkFkbWlucyIiCgdSZWFkZXJzEhcSDQgDEgkKB1JlYWRlcnMaBkFkbWlucyIiCgdX
+      cml0ZXJzEhcSDQgDEgkKB1dyaXRlcnMaBkFkbWlucyIiCgZBZG1pbnMSGBIOCAMSCgoGQWRtaW5z
+      EAIaBkFkbWlucyIqCgtFbmRvcnNlbWVudBIbEhEIAxINCgtFbmRvcnNlbWVudBoGQWRtaW5zIjMK
+      FExpZmVjeWNsZUVuZG9yc2VtZW50EhsSEQgDEg0KC0VuZG9yc2VtZW50GgZBZG1pbnMqBkFkbWlu
+      cxofCgpDb25zb3J0aXVtEhESDwoNVW1iQ29uc29ydGl1bQ==

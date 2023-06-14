@@ -1,0 +1,45 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: issuer-net-ca
+  namespace: issuer-net
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: issuer-net-ca
+  chart:
+    git: git@github.com:sivaramkannan/baf-intain-fork.git
+    ref: umbprod
+    path: platforms/hyperledger-fabric/charts/ca    
+  values:
+    metadata:
+      namespace: issuer-net
+      images:
+        alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+        ca: hyperledger/fabric-ca:1.4.8
+       
+    server:
+      name: ca
+      tlsstatus: true
+      admin: issuer-admin
+    storage:
+      storageclassname: issuersc
+      storagesize: 512Mi
+    vault:
+      role: vault-role
+      address: http://umbprod.westus2.cloudapp.azure.com:8200
+      authpath: devissuer-net-auth
+      secretcert: secret/crypto/peerOrganizations/issuer-net/ca?ca.issuer-net-cert.pem
+      secretkey: secret/crypto/peerOrganizations/issuer-net/ca?issuer-net-CA.key
+      secretadminpass: secret/credentials/issuer-net/ca/issuer?user
+      serviceaccountname: vault-auth
+      imagesecretname: regcred
+    service:
+      servicetype: ClusterIP
+      ports:
+        tcp:
+          port: 7054
+    proxy:
+      provider: haproxy
+      type: peer
+      external_url_suffix: umbprod.intainabs.com

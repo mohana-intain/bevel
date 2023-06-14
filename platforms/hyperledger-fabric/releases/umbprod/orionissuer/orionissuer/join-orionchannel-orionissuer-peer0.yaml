@@ -1,0 +1,40 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: join-orionissuer-orionchannel
+  namespace: orionissuer-net
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: join-orionissuer-orionchannel
+  chart:
+    git: git@github.com:sivaramkannan/baf-intain-fork.git
+    ref: umbprod
+    path: platforms/hyperledger-fabric/charts/join_channel
+  values:
+    metadata:
+      namespace: orionissuer-net
+      images:
+        fabrictools: hyperledger/fabric-tools:2.2.2
+        alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+
+    peer:
+      name: peer0
+      address: peer0.orionissuer-net:7051
+      localmspid: orionissuerMSP
+      loglevel: debug
+      tlsstatus: true
+
+    vault:
+      role: vault-role
+      address: http://umbprod.westus2.cloudapp.azure.com:8200
+      authpath: devorionissuer-net-auth
+      adminsecretprefix: secret/crypto/peerOrganizations/orionissuer-net/users/admin
+      orderersecretprefix: secret/crypto/peerOrganizations/orionissuer-net/orderer
+      serviceaccountname: vault-auth
+      imagesecretname: regcred
+
+    channel:
+      name: orionchannel      
+    orderer:
+      address: orderer1.intain-net:7050

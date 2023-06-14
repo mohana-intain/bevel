@@ -1,0 +1,27 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: intain-net-ca-tools
+  namespace: intain-net
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: intain-net-ca-tools
+  chart:
+    git: git@github.com:sivaramkannan/baf-intain-fork.git
+    ref: umbprod
+    path: platforms/hyperledger-fabric/charts/catools
+  values:
+    metadata:
+      namespace: intain-net
+      name: ca-tools
+    replicaCount: 1
+
+    image:
+      repository: hyperledger/fabric-ca-tools
+      tag: 1.2.1
+      pullPolicy: IfNotPresent
+      
+    storage:
+      storageclassname: intainsc
+      storagesize: 512Mi

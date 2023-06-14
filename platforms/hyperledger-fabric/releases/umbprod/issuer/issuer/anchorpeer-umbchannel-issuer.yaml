@@ -1,0 +1,48 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: anchorpeer-umbchannel-issuer
+  namespace: issuer-net
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: anchorpeer-umbchannel-issuer
+  chart:
+    git: git@github.com:sivaramkannan/baf-intain-fork.git
+    ref: umbprod
+    path: platforms/hyperledger-fabric/charts/anchorpeer
+  values:
+    metadata:
+      namespace: issuer-net
+      images:
+        fabrictools: hyperledger/fabric-tools:2.2.2
+        alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+
+    peer:
+      name: peer0
+      address: peer0.issuer-net:7051
+      localmspid: issuerMSP
+      loglevel: debug
+      tlsstatus: true
+
+    vault:
+      role: vault-role
+      address: http://umbprod.westus2.cloudapp.azure.com:8200
+      authpath: devissuer-net-auth
+      adminsecretprefix: secret/crypto/peerOrganizations/issuer-net/users/admin
+      orderersecretprefix: secret/crypto/peerOrganizations/issuer-net/orderer
+      serviceaccountname: vault-auth
+      imagesecretname: regcred
+
+    channel:
+      name: umbchannel      
+    orderer:
+      address: orderer1.intain-net:7050
+    anchorstx: |-
+      CssCChgKFggCGgYI6sTBlgYiCnVtYmNoYW5uZWwSrgIKqwIKCnVtYmNoYW5uZWwSYhJgCgtBcHBs
+      aWNhdGlvbhJRCAESTQoJaXNzdWVyTVNQEkAaBwoDTVNQEgAiDwoLRW5kb3JzZW1lbnQSACILCgdS
+      ZWFkZXJzEgAiCwoHV3JpdGVycxIAIgoKBkFkbWlucxIAGrgBErUBCgtBcHBsaWNhdGlvbhKlAQgB
+      EqABCglpc3N1ZXJNU1ASkgEIARpGCgtBbmNob3JQZWVycxI3Ei0KKwomcGVlcjAuaXNzdWVyLW5l
+      dC51bWJwcm9kLmludGFpbmFicy5jb20Q+0EaBkFkbWlucxoHCgNNU1ASACIPCgtFbmRvcnNlbWVu
+      dBIAIgsKB1JlYWRlcnMSACILCgdXcml0ZXJzEgAiCgoGQWRtaW5zEgAqBkFkbWlucw==
+

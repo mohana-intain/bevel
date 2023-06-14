@@ -1,0 +1,49 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: anchorpeer-charlesfortchannel-charlesfortissuer
+  namespace: charlesfortissuer-net
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: anchorpeer-charlesfortchannel-charlesfortissuer
+  chart:
+    git: git@github.com:sivaramkannan/baf-intain-fork.git
+    ref: umbprod
+    path: platforms/hyperledger-fabric/charts/anchorpeer
+  values:
+    metadata:
+      namespace: charlesfortissuer-net
+      images:
+        fabrictools: hyperledger/fabric-tools:2.2.2
+        alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+
+    peer:
+      name: peer0
+      address: peer0.charlesfortissuer-net:7051
+      localmspid: charlesfortissuerMSP
+      loglevel: debug
+      tlsstatus: true
+
+    vault:
+      role: vault-role
+      address: http://umbprod.westus2.cloudapp.azure.com:8200
+      authpath: devcharlesfortissuer-net-auth
+      adminsecretprefix: secret/crypto/peerOrganizations/charlesfortissuer-net/users/admin
+      orderersecretprefix: secret/crypto/peerOrganizations/charlesfortissuer-net/orderer
+      serviceaccountname: vault-auth
+      imagesecretname: regcred
+
+    channel:
+      name: charlesfortchannel      
+    orderer:
+      address: orderer1.intain-net:7050
+    anchorstx: |-
+      CvwCCiAKHggCGgYIgNDBlgYiEmNoYXJsZXNmb3J0Y2hhbm5lbBLXAgrUAgoSY2hhcmxlc2ZvcnRj
+      aGFubmVsEm0SawoLQXBwbGljYXRpb24SXAgBElgKFGNoYXJsZXNmb3J0aXNzdWVyTVNQEkAaBwoD
+      TVNQEgAiCgoGQWRtaW5zEgAiDwoLRW5kb3JzZW1lbnQSACILCgdSZWFkZXJzEgAiCwoHV3JpdGVy
+      cxIAGs4BEssBCgtBcHBsaWNhdGlvbhK7AQgBErYBChRjaGFybGVzZm9ydGlzc3Vlck1TUBKdAQgB
+      GlEKC0FuY2hvclBlZXJzEkISOAo2CjFwZWVyMC5jaGFybGVzZm9ydGlzc3Vlci1uZXQudW1icHJv
+      ZC5pbnRhaW5hYnMuY29tEPtBGgZBZG1pbnMaBwoDTVNQEgAiCgoGQWRtaW5zEgAiDwoLRW5kb3Jz
+      ZW1lbnQSACILCgdSZWFkZXJzEgAiCwoHV3JpdGVycxIAKgZBZG1pbnM=
+

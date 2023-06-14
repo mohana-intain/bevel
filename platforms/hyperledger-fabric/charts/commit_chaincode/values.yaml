@@ -1,9 +1,3 @@
-##############################################################################################
-#  Copyright Accenture. All Rights Reserved.
-#
-#  SPDX-License-Identifier: Apache-2.0
-##############################################################################################
-
 metadata:
   # HLF network version
   network:
@@ -59,9 +53,6 @@ vault:
   #Provide the value for vault secretprefix
   #Eg. orderersecretprefix: secret/...
   orderersecretprefix:
-  #Provide the value secret path
-  #Eg. orderersecretprefix: secret/...
-  secretpath:
   #Provide the serviceaccountname for vault
   #Eg. serviceaccountname: vault-auth
   serviceaccountname:
@@ -115,6 +106,4 @@ endorsers:
   # Name all the orgs which are approving the chaincode
   name: 
   # CorepeerAddresses all the orgs which are approving the chaincode
-  corepeeraddress:
-  # Name all the orgs which are approving the chaincode in list format
-  nameslist: {}
+  corepeeraddress: 

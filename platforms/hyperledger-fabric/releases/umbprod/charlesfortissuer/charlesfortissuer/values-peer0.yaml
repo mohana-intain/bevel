@@ -1,0 +1,63 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: charlesfortissuer-peer0
+  namespace: charlesfortissuer-net
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: charlesfortissuer-peer0
+  chart:
+    git: git@github.com:sivaramkannan/baf-intain-fork.git
+    ref: umbprod
+    path: platforms/hyperledger-fabric/charts/peernode    
+  values:
+    metadata:
+      namespace: charlesfortissuer-net
+      images:
+        couchdb: couchdb:3.1
+        peer: hyperledger/fabric-peer:2.2.2
+        alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+        
+    peer:
+      name: peer0
+      gossippeeraddress: peer0.charlesfortissuer-net:7051
+      gossipexternalendpoint: peer0.charlesfortissuer-net.umbprod.intainabs.com:8443
+      localmspid: charlesfortissuerMSP
+      loglevel: info
+      tlsstatus: true
+      builder: hyperledger/fabric-ccenv:2.2.2
+      couchdb:
+        username: charlesfortissuer-user
+
+    storage:
+      peer:
+        storageclassname: charlesfortissuersc
+        storagesize: 10Gi
+      couchdb:
+        storageclassname: charlesfortissuersc
+        storagesize: 10Gi
+
+    vault:
+      role: vault-role
+      address: http://umbprod.westus2.cloudapp.azure.com:8200
+      authpath: devcharlesfortissuer-net-auth
+      secretprefix: secret/crypto/peerOrganizations/charlesfortissuer-net/peers/peer0.charlesfortissuer-net
+      secretambassador: secret/crypto/peerOrganizations/charlesfortissuer-net/ambassador
+      serviceaccountname: vault-auth
+      imagesecretname: regcred
+      secretcouchdbpass: secret/credentials/charlesfortissuer-net/couchdb/charlesfortissuer?user
+
+    service:
+      servicetype: ClusterIP
+      ports:
+        grpc:
+          clusteripport: 7051
+        events:
+          clusteripport: 7053
+        couchdb:
+          clusteripport: 5984
+          
+    proxy:
+      provider: "haproxy"
+      external_url_suffix: umbprod.intainabs.com

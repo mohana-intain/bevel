@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: intain-net
+secrets:
+- name: default
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: default
+  namespace: intain-net
+  annotations:
+    kubernetes.io/service-account.name: default
+type: kubernetes.io/service-account-token
